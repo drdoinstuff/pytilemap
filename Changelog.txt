@@ -1,9 +1,9 @@
 //todo
-systemwide: sort out what needs to be a class attribute if it doesnt put it in 
+systemwide: sort out what needs to be a class attribute if it doesnt put it in
 __init__ and call it with super()
 interface: listener- OnEvent based, windows and clickable/dragable
 tiler: try moving tiler to a sprite - group draw method it might be faster
-tiler: make tiler blit to a surface and then dirty blit to itwhen needed
+tiler: make tiler blit to a surface and then dirty rect where needed
 tiler: when scrolling subsurf it and reblit it, then draw new tiles!
 
 #how do I change all the pathfinding and everything else to the new map when it's loaded?
@@ -16,7 +16,7 @@ tiler: when scrolling subsurf it and reblit it, then draw new tiles!
 + improved map reading alot! but made t alot harder to read the script :(
 + added a scan line effect as a test, screen surface should become just a normal surface
     and blit to the screen surface last thing.
-- removed scanline effect <13% cpu vs >50% !!!!
+- removed scanline effect (per frame iteration is a bit cpu heavy! <13% cpu vs >50%)
 
 bugs:
 - window focus drops through windows if they ar layered
@@ -40,7 +40,6 @@ bugs:
 
 // 13/08/2010
 + small cleanup
-*made .zip snapshot
 
 // 08/08/2010
 + a* function 
@@ -50,7 +49,6 @@ bugs:
 + READING IN TILE ATTRIBUTES WORKS 
 + CAN QUERY A TILE BY LOCATION AND GID NOW
 -REMOVED ALL Box2d CODE
-*made .7z snapshot
 
 
 // 23/6/2010
@@ -59,4 +57,3 @@ bugs:
 
 // 22/05/2010 
 + started to add box2d
-- note .7ziped snapshot
