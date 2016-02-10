@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="1" height="1" tilewidth="8" tileheight="8">
+ <properties>
+  <property name="prop 1" value="1"/>
+  <property name="prop 2" value="2"/>
+ </properties>
+ <tileset firstgid="1" name="lofi_environment_a" tilewidth="8" tileheight="8">
+  <image source="../tiles/_no_ownership/oryx_lofi_1.2/oryx_lofi_1.1/lofi_environment_a.png"/>
+  <tile id="0">
+   <properties>
+    <property name="tile prop 1" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Layer 1" width="1" height="1">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NkYGAAAHm4+JkEAAAA
+  </data>
+ </layer>
+</map>

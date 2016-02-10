@@ -1,0 +1,23 @@
+#conf file v0.1b ;p
+
+#bool DEBUG False
+
+bool fullscreen False
+#bool fullscreen True
+tuple res int:800,int:400
+#tuple res int:1440,int:900
+int fps 60
+
+int scale 5
+float animstep 5
+float deltatime 1.0
+
+#nested list stress test - failed
+#list t 
+#list test list:string:assets, 
+
+#assets
+#FONT
+list font_path string:assets,string:fonts,string:ahronbd.ttf
+
+#MAPS

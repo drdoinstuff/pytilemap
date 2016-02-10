@@ -1,0 +1,62 @@
+//todo
+systemwide: sort out what needs to be a class attribute if it doesnt put it in 
+__init__ and call it with super()
+interface: listener- OnEvent based, windows and clickable/dragable
+tiler: try moving tiler to a sprite - group draw method it might be faster
+tiler: make tiler blit to a surface and then dirty blit to itwhen needed
+tiler: when scrolling subsurf it and reblit it, then draw new tiles!
+
+#how do I change all the pathfinding and everything else to the new map when it's loaded?
+
+//02/01/2010
+- removed alot of the window management script
++ unified the window focus system
++ objects are added to the event manager and render manager when they are started now
++ simple movement smoothing on NPCs
++ improved map reading alot! but made t alot harder to read the script :(
++ added a scan line effect as a test, screen surface should become just a normal surface
+    and blit to the screen surface last thing.
+- removed scanline effect <13% cpu vs >50% !!!!
+
+bugs:
+- window focus drops through windows if they ar layered
+- movement smoothing gets out of sync with the map if you move it 
+    when the avatar is moving, is reset on every tile, so not a huge issue
+
+// 07/11/2010
++ rudimentary UI
+
+// 04/11/2010
++ mouse draging works well now- needs tidying
+
+// 29/10/2010
++ Some cleaning up
++ made a functional templatized event driven thing maybe//mvc style template 'framework'
+
+// 14/08/2010
++ removed try except in pathfinding
++ moved query tile into Map class from tiler
+*seems to run
+
+// 13/08/2010
++ small cleanup
+*made .zip snapshot
+
+// 08/08/2010
++ a* function 
+*made .zip snapshot
+
+// 25/07/2010
++ READING IN TILE ATTRIBUTES WORKS 
++ CAN QUERY A TILE BY LOCATION AND GID NOW
+-REMOVED ALL Box2d CODE
+*made .7z snapshot
+
+
+// 23/6/2010
+- error in ordering tiles in smooth.tmx
+* priority: fix blitting code and add groups for / and limits on the number of sprites
+
+// 22/05/2010 
++ started to add box2d
+- note .7ziped snapshot

@@ -1,0 +1,22 @@
+#not used 
+
+name test_sprite_defs
+#gid_base = 0 set in class
+
+#parings
+#path from game toplevel directory
+
+string basepath \assets\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1
+
+string filename lofi_char_a.png
+str name single
+tuple size (8,8)
+tuple from (0,0)
+tuple to (127, 119)
+
+str name double
+tuple size (16,8)
+tuple from (127, 119)
+tuple to (,)
+
+

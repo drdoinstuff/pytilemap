@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="8" tileheight="8">
+ <properties>
+  <property name="load_map" value="(6,0)"/>
+  <property name="spawn_player_at" value="(1,2)"/>
+ </properties>
+ <tileset firstgid="1" name="lofi_environment_a" tilewidth="8" tileheight="8">
+  <image source="../tiles/_no_ownership/oryx_lofi_1.2/oryx_lofi_1.1/lofi_environment_a.png"/>
+  <tile id="0">
+   <properties>
+    <property name="test_tile_name" value="test_tile_value"/>
+    <property name="test_tile_name" value="test_tile_value"/>
+    <property name="tile prop 1" value="1"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="walkable" value="True"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="walkable" value="True"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="walkable" value="True"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="load_map" value="map2"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="257" name="lofi_dungeon_features_a" tilewidth="8" tileheight="8">
+  <image source="../tiles/_no_ownership/oryx_lofi_1.2/oryx_lofi_1.1/lofi_dungeon_features_a.png"/>
+ </tileset>
+ <tileset firstgid="365" name="lofi_obj_a" tilewidth="8" tileheight="8">
+  <image source="../tiles/_no_ownership/oryx_lofi_1.2/oryx_lofi_1.1/lofi_obj_a.png"/>
+ </tileset>
+ <layer name="base" width="50" height="50">
+  <properties>
+   <property name="test_name" value="test_value"/>
+  </properties>
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2WWw7CIBBFaSXUV7fkdrre7kiaMPFmpIWvMjT340SIGO9xhrGDc26IjBEfWSJr5J7WQ2JOhITst/cmBZ4/C51xy/GMPNIazwSFRY9Pqscr8k5ryYQektWaB36/B8adeuQ8hOD++/DsekwVZ/Y8sC/Pzo8ZJ/e75xs3la/WoyXSD5hRvLBnZpe/51YQjyWTU3730txt7SA5NJLfw6uujd63BmdNUGvJ7wufb+2AfaL7KddTV/HAOWDRQ/8fX9ED55N1jyN6uR+5Z6Pc/ojWDrou6FaqU02tWqM99u5NTx6lWWbZpdbDek1q70cPHrmZ1MO8IoQQQgghhBBCCCGEENIXX+ZJWfIQJwAA
+  </data>
+ </layer>
+ <layer name="objects" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OMREAMAgEsK//oVpxwFYL3NFEQZI97pke8JuaDgAAAAAAAAAAAE8D8nicoxAnAAA=
+  </data>
+ </layer>
+ <layer name="map_defs" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3IMQEAAAgDoDWwf1sDzAAecJK0OQ4AAAAAAAAAAAA+W3B+YGkQJwAA
+  </data>
+ </layer>
+</map>
