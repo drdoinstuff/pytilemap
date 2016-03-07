@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{36b6114e-f39a-463e-b934-7de9ab9cdef5}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>App.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</InterpreterId>
+    <InterpreterVersion>2.7</InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="assets\tiles\Untitled.png" />
+    <Content Include="assets\tiles\x.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_char.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_char_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_obj.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_obj_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_scifi.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_1bit_scifi_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_char.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_char_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_dungeon_features.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_dungeon_features_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_environment.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_environment_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_font_big.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_font_small.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_halls.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_halls_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_hats_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_interface.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_interface_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_obj.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_obj_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_portrait.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\lofi_portrait_a.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_1bit.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_1bit_anim.gif" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_char.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_env.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_halls.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_portrait.png" />
+    <Content Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1\preview_sample.png" />
+    <Content Include="assets\tiles\_no_ownership\source.txt" />
+    <Content Include="Changelog.txt" />
+    <Content Include="config\config.txt" />
+    <Content Include="config\sprites.txt" />
+    <Content Include="screenshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.py" />
+    <Compile Include="lib\effects\surface.py" />
+    <Compile Include="lib\effects\__init__.py" />
+    <Compile Include="lib\game_specific\inventory.py" />
+    <Compile Include="lib\game_specific\player.py" />
+    <Compile Include="lib\game_specific\__init__.py" />
+    <Compile Include="lib\input.py" />
+    <Compile Include="lib\loaders\fileoperations.py" />
+    <Compile Include="lib\loaders\image.py" />
+    <Compile Include="lib\loaders\load_little_assets.py" />
+    <Compile Include="lib\loaders\MapLoaderSupport\helper_functions.py" />
+    <Compile Include="lib\loaders\MapLoaderSupport\wrapper_classes.py" />
+    <Compile Include="lib\loaders\MapLoaderSupport\__init__.py" />
+    <Compile Include="lib\loaders\map_loader.py" />
+    <Compile Include="lib\loaders\simplexml.py" />
+    <Compile Include="lib\loaders\tilesheet.py" />
+    <Compile Include="lib\loaders\type_cast.py" />
+    <Compile Include="lib\loaders\__init__.py" />
+    <Compile Include="lib\main.py" />
+    <Compile Include="lib\myBitMapFont\text.py" />
+    <Compile Include="lib\myBitMapFont\__init__.py" />
+    <Compile Include="lib\myEvents\controlers.py" />
+    <Compile Include="lib\myEvents\coreevents.py" />
+    <Compile Include="lib\myEvents\eventlistener.py" />
+    <Compile Include="lib\myEvents\eventtype.py" />
+    <Compile Include="lib\myEvents\joy.py" />
+    <Compile Include="lib\myEvents\mouse.py" />
+    <Compile Include="lib\myEvents\mykbd.py" />
+    <Compile Include="lib\myEvents\register.py" />
+    <Compile Include="lib\myEvents\__init__.py" />
+    <Compile Include="lib\myMath\linear.py" />
+    <Compile Include="lib\myMath\mymath.py" />
+    <Compile Include="lib\myMath\__init__.py" />
+    <Compile Include="lib\myTilemap\tilemap.py" />
+    <Compile Include="lib\myTilemap\__init__.py" />
+    <Compile Include="lib\myTimers\ptimer.py" />
+    <Compile Include="lib\myTimers\__init__.py" />
+    <Compile Include="lib\myTypes\weakreflist.py" />
+    <Compile Include="lib\myTypes\__init__.py" />
+    <Compile Include="lib\myUI\myUI.py" />
+    <Compile Include="lib\myUI\Shared.py" />
+    <Compile Include="lib\myUI\Widget.py" />
+    <Compile Include="lib\myUI\Window.py" />
+    <Compile Include="lib\myUI\WindowManager.py" />
+    <Compile Include="lib\myUI\__init__.py" />
+    <Compile Include="lib\pathfinding.py" />
+    <Compile Include="lib\shared.py" />
+    <Compile Include="lib\text.py" />
+    <Compile Include="lib\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
+    <Folder Include="assets\tiles" />
+    <Folder Include="assets\tiles\_no_ownership" />
+    <Folder Include="assets\tiles\_no_ownership\oryx_lofi_1.2\" />
+    <Folder Include="assets\tiles\_no_ownership\oryx_lofi_1.2\oryx_lofi_1.1" />
+    <Folder Include="config" />
+    <Folder Include="lib" />
+    <Folder Include="lib\effects" />
+    <Folder Include="lib\game_specific" />
+    <Folder Include="lib\loaders" />
+    <Folder Include="lib\loaders\MapLoaderSupport" />
+    <Folder Include="lib\myBitMapFont" />
+    <Folder Include="lib\myEvents" />
+    <Folder Include="lib\myMath" />
+    <Folder Include="lib\myTilemap" />
+    <Folder Include="lib\myTimers" />
+    <Folder Include="lib\myTypes" />
+    <Folder Include="lib\myUI" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="{2af0f10d-7135-4994-9156-5d01c9c11b7e}\2.7" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
