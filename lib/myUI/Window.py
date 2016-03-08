@@ -33,9 +33,7 @@ class WindowAttributes(object):
         self.MAXIMISED = False
         self.DRAGGED = False
         self.CLICKED = False
-
         self.CLOSED = False
-
         self.DESTROY = False
 
 class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
@@ -45,17 +43,14 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
         ## this is needed probably because
         ## I have some pretty crappy class design
         UIShared.window_manager.listeners.remove(self)
-
         self.listeningEvents = EventTypes.mouse + EventTypes.kbd
         #add us to the window manager
         self.window_manager.attach(self)
         self.listeners = wrl()
-
         self.window_attributes = WindowAttributes()
         self.rect = surface.get_rect(topleft = pos)
         self.surface = surface
         self.widget_reference_coord = pos
-
     # def attach(self, listener):
         # print "you you you....", self, listener
         # exit()
@@ -66,15 +61,12 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
         #print listener, type(listener)
         if listener.rect.x <= self.rect.width:
             if listener.rect.width <= self.rect.width >= listener.rect.x + listener.rect.width:
-
                 if listener.rect.y <= self.rect.size[1]:
                     if listener.rect.size[1] <= self.rect.size[1] >= listener.rect.y + listener.rect.size[1]:
-
                         #super(Window, self).attach(listener)
                          self.attach(listener)
                          print 'set', self, ' as parent'
                          listener.set_parent(self)
-
                     else:
                         print ERROR
                 else:
@@ -93,31 +85,25 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
 
     def draw(self, screen, event):
         if not self.window_attributes.SCROLLED:
-            scale = SharedObjects.Scale()
+            scale = SharedObjects.getScale()
             bg = scale_surf(self.surface, scale)
             self.rect.size = bg.get_size()
-
             x = self.rect.topleft[0] * scale
             y = self.rect.topleft[1] * scale
             rect = pygame.rect.Rect((x,y), self.rect.size)
-
-            screen_rect = SharedObjects.Screen().get_rect()
+            screen_rect = SharedObjects.getScreen().get_rect()
             rect = rect.clamp(screen_rect)
-
             self.rect.x = rect.x / scale
             self.rect.y = rect.y / scale
-
             x = rect.x
             y = rect.y
-
             self.widget_reference_coord = (x,y)
             screen.blit(bg, (x,y))
-
             for widget in self.listeners:
                 widget().draw(screen, (x,y))
 
     def __event_to_widgets__(self, event):
-        scale = SharedObjects.Scale()
+        scale = SharedObjects.getScale()
 
         for widget in self.listeners:
             widget = widget()
@@ -128,7 +114,6 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
                     widget.on_widget_focus(event)
                     Listener.setBlocking(self)
 
-
     def on_mouse_motion(self, event):
         if (UIShared.focused_window is self) and (self.window_attributes.DRAGGED):
             Listener.setBlocking(self.window_manager)
@@ -136,7 +121,7 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
             self.moved(event.pos)
             mv = self.movement()#'unscaled')
             #'snap' to 'pixels'
-            #scale = SharedObjects.Scale()
+            #scale = SharedObjects.getScale()
             #xq, yq = (-mv[0]%scale), (-mv[1]%scale)
             #dont 'snap' to 'pixels'
             xq, yq = 0, 0
@@ -152,11 +137,11 @@ class Window(RegisterComponent, Dragable, UIShared, Listener): #MouseListener):#
         self.window_attributes.CLICKED = True
         self.button_down( 1, event.pos, (-self.rect.x, -self.rect.y))
 
-        scale =  SharedObjects.Scale()
+        scale =  SharedObjects.getScale()
 
         #window area
         if not self.window_attributes.SCROLLED:
-            scale =  SharedObjects.Scale()
+            scale =  SharedObjects.getScale()
             # x = self.rect.x * scale
             # y = self.rect.y * scale
             x = self.widget_reference_coord[0] #* scale

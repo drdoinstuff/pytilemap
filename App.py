@@ -1,11 +1,8 @@
 #!/usr/bin/env python
-
 from time import time
 import os, sys, time, random, math, string
-#from functools import partial
 import pygame
 from pygame.locals import *
-
 from lib.main import Game
 from lib.myEvents.eventtype import EventTypes as EventTypes
 from lib.shared import SharedObjects
@@ -30,13 +27,13 @@ class myKBD(eventlistener.KeyBoardListener, eventlistener.PushComponent, SharedO
     def on_key_q_down(self, event):
         self.push(EventTypes.push_quit)
     def on_key_z_down(self, event):
-        x = SharedObjects.Scale()
+        x = SharedObjects.getScale()
         SharedObjects.setScale(  x+1 )
     def on_key_x_down(self, event):
-        x = SharedObjects.Scale()
+        x = SharedObjects.getScale()
         if x != 1:
             SharedObjects.setScale(  x-1 )
-
+            
 class ShowWin(myUI.Widget.Button):
     def __init__(self, img, pos, child_window):
         super(ShowWin, self).__init__(img, pos)
@@ -63,7 +60,7 @@ class CommandSetZoom(myUI.Widget.Button):
         super(CommandSetZoom, self).__init__(img, pos)
         self.interval = interval
     def on_widget_focus(self, event):
-        scale = SharedObjects.Scale() + self.interval
+        scale = SharedObjects.getScale() + self.interval
         if scale < 1:
             scale -= self.interval
         SharedObjects.setScale(scale)
@@ -101,8 +98,8 @@ quitter = Quitter()
 # example of myKBD listener
 # esc key pushes a quit event
 kbdman = myKBD()
-#SharedObjects.setFlushColor((255,255,255))
-SharedObjects.setFlushColor((0,0,0))
+SharedObjects.setFlushColor((255,255,255))
+#SharedObjects.setFlushColor((0,0,0))
 #filepath =  string.join(game.paths.assets + ["maps", "test_pathfinding.tmx"], os.path.sep)
 filepath =  game.paths.assets + os.path.sep + "maps" + os.path.sep + "test2.tmx"
 ## reading map data
@@ -110,7 +107,7 @@ tmap = ReadMap(filepath)
 mapobj = tmap.parse(game.paths.assets)
 ## actual tiler- attaches to event and render manager
 s = mapobj.map.properties['spawn_player_at']
-scale = SharedObjects.Scale()
+scale = SharedObjects.getScale()
 x = s[0] * mapobj.map.tilewidth * scale
 y = s[1] * mapobj.map.tileheight * scale
 mx =  (mapobj.map.width * scale/2) #- x
@@ -136,7 +133,7 @@ img4 = art.assets.retrieve("lofi_halls_a", ((31, 725),(10, 10)) )
 img5 = art.assets.retrieve("lofi_halls_a", ((41, 419),(10, 10)) )
 img6 = art.assets.retrieve("lofi_halls_a", ((52, 419),(10, 10)) )
 win1 = art.assets.retrieve("lofi_halls_a", ((9, 601), (55, 31)) )
-#show window demo
+## show window demo
 winroot = myUI.Window(win1, (20,20))#
 close = myUI.Widget.HideButton( (2,2), img2)
 map1 =  os.path.sep.join([game.paths.assets, "maps", "test.tmx"])
@@ -161,6 +158,6 @@ winroot.attach_widget(zoomout)
 game.eventmanager.listeners.remove(tiler)
 game.eventmanager.listeners.append(tiler)
 
-print( 'Entering Mainloop')
+print( 'Entering Main Loop')
 while True:
     game.update()

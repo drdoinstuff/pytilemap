@@ -19,15 +19,12 @@ class FormatConstants(object):
     
 class Data(object):
     ''' decode base64, unzip, read 4 byts at a time'''
-
     def getOrdered(self, width, height ):
         def _gen_(width):
             for i in range(0, len(self.data), width):
-                yield i
-                
+                yield i  
         ordered =[]
         part = _gen_(width)
-        
         for i in part:
             ordered.append(self.data[i:i+width])
         self.ordered = ordered
@@ -45,34 +42,27 @@ class Data(object):
                 yield node #call with .next()
                 
     def _decode_data(self, data):
-    
         return base64.b64decode(data)
     
     def _decompress_data(self, b64_dec):
         stream = StringIO.StringIO(b64_dec)
         gzipper = gzip.GzipFile(fileobj=stream)
-
         s = gzipper.read()
-        
         #rewrite stolen code - cheers dude!
         decoded_content = []
         for idx in xrange(0, len(s), 4):
             val = ord(str(s[idx])) | (ord(str(s[idx + 1])) << 8) | \
                  (ord(str(s[idx + 2])) << 16) | (ord(str(s[idx + 3])) << 24)
             decoded_content.append(val)
-    
         self.data =  decoded_content
         return self.data
-
 
 class MapContainer(object):
     def getLayer(self, l):
         return self.layers[l]
-    
     def getLayers(self):
         for i in self.layers:
             yield i
-            
     # def setTileByIndex(self, x, y):
         # pass
     def getTileProperties(self, gid):
@@ -85,34 +75,28 @@ class MapContainer(object):
             if i == local_gid:
             #print dir(tile_set.properties[local_gid])
                 return tile_set.properties[local_gid]
-        
     def getTileByIndex(self, x, y, layer):
         try:
             tile_id = layer.data.ordered[y][x]
         except IndexError:
             tile_id = 0
-            
         return tile_id
-        
-            
     def getTileSurface(self, tile_name, rect):
         return self.getTileset(tile_name).image.subsurface(rect)
-        
     def getTileset(self, name):
         return self.tiles.tilesets[name]
-        
     def getTileByGID(self, tile_id):
-        return self.tiles.globalID[tile_id]
-        
+        try:
+            tid = self.tiles.globalID[tile_id]
+        except KeyError:
+            tid = None
+        return tid
     def getMapTileWidth(self):
         return self.map.tilewidth
-        
     def getMapTileHeight(self):
         return self.map.tileheight
-        
     def getMapWidth(self):
         return self.map.width
-        
     def getMapHeight(self):
         return self.map.height
         
@@ -126,29 +110,12 @@ class Layer(object):
             return self.visible
         else:
             return 1
-    
     def getOpacity(self):
         try:
             opacity = 255 - int(255 * self.opacity)
         except AttributeError:
             opacity = 255
         return opacity
-        
+
 class Tileset(object):
     pass
-    #gid = dict()
-    
-    # @staticmethod
-    # def get_gid():
-        # return self.gid
-    # @staticmethod
-    # def set_gid(gid):
-        # self.gid = gid
-    # def _build_gid_list(self):
-        # for tileset in self.setlist:
-            # count = 0
-            # for tile in tileset.tiles.items():
-                # img = tileset.tiles[count]
-                # self.gid[tileset.firstgid + count] = img
-                
-                # count+=1

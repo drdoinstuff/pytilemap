@@ -1,14 +1,10 @@
 import os, string
 from string import join
-
 import pygame
 
 from shared import SharedObjects, Timer
 from loaders.fileoperations import ConfigReader
-from myEvents.eventlistener import Listener
-#from myEvents.eventloop import EventManager
 from myEvents.controlers import RenderManager, EventManager
-
 
 def PathToString(path):
     #return string.join(path, os.path.sep)
@@ -16,9 +12,6 @@ def PathToString(path):
 
 class Paths(object):
     def __init__(self ):
-
-        #self.lib = base_path
-        #this means no escaped \n chars etc.
         tmp = os.path.abspath(__file__)
         #remove current dir from path
         #tmp = tmp.split(os.path.sep)
@@ -28,13 +21,9 @@ class Paths(object):
         print(tmp)
         #tmp = os.path.join(*tmp[:len(tmp) - 2])
         #print(tmp)
-        #game dir
         self.base = tmp
-        #conf dir
         self.config = os.path.join(tmp, 'config')
-        #all assets
         self.assets = os.path.join(tmp, 'assets')
-        #all saves
         self.save = os.path.join(tmp, 'save')
 
     def join(self, path, file):
@@ -43,40 +32,27 @@ class Paths(object):
 
 
 class Timers(object):
-
-
     def __init__(self, anim_step):
-
-
         self.animation_timer = Timer(anim_step)
         self.framerate = pygame.time.Clock()
 
-class Game(SharedObjects):#, Listener):
-
-
+class Game(SharedObjects):
     pygame.init()
     def __init__(self):
-
         super(Game, self).__init__()
         #setup path in a new namespace
-
         self.paths = Paths()
         print( '%s \t Set Up Paths') %self
-
         #read variables into this class another way to do this
         self.read_conf(PathToString(os.path.join(self.paths.config, 'config.txt')))
         print( '%s \t Loaded Config File') %self
-
         self.timers = Timers(self.animstep)
-        #shared across all objects
         SharedObjects.setAnimationStep(self.animstep)
         SharedObjects.setScale(self.scale)
         SharedObjects.setDeltaTime(self.deltatime)
         print( '%s \t Set some variables') %self
-
         self.display = self.init_display(self.res, self.fullscreen)
         print( '%s \t Initialised Display') %self
-
         #EventManager
         self.eventmanager = EventManager()
         #RenderManager
@@ -101,6 +77,7 @@ class Game(SharedObjects):#, Listener):
         return int(self.timers.framerate.get_fps())
 
     def update(self):
+        SharedObjects.update()
         if self.timers.framerate.tick(self.fps):
             #print self.get_fps()
             #tick for animations etc.
@@ -108,7 +85,7 @@ class Game(SharedObjects):#, Listener):
             #loop through events
             self.eventmanager.post()
             #draw stuff
-            self.rendermanager.render(self.display, self.Screen(), self.FlushColor(), None)
+            self.rendermanager.render(self.display, self.getScreen(), self.getFlushColor(), None)
             #self.rendermanager.render(self.display, self.offscreen_surf, self.FlushColor(), None)
 
     notify = update

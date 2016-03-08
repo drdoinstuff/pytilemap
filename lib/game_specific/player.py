@@ -1,5 +1,4 @@
 import weakref, random
-
 import pygame
 from pygame.locals import *
 
@@ -10,24 +9,18 @@ from ..myEvents.eventtype import EventTypes
 from ..myMath.linear import LinearInterpolate as Interpolate
 from ..effects.surface import scale as scale_surf
 from ..pathfinding import AStar
-
 from inventory import Inventory
-
-
 
 class AnimatedObject(SharedObjects, eventlistener.CombinedMouseKeyBoard, eventlistener.PushComponent):
     def __init__(self, img, pos, tiler):
         super(AnimatedObject, self).__init__()
         self.timed_animation = True
-        
         self.tiler = weakref.proxy(tiler)
         self.image = img
         #classes AStar, Inventory
-        #this should be warper with map into a single object where I can query path and data from the map, ie objects and monsters party members etc
+        #this should be warped with map into a single object where I can query path and data from the map, ie objects and monsters party members etc
         self.pathfinder = AStar(self.tiler.map)#, (self.image.get_width()/2,self.image.get_height()/2) )
-
         self.inventory = Inventory((1,5))
-        
         #initialise position
         self.x = pos[0]
         self.y = pos[1]
@@ -49,10 +42,9 @@ class Avatar(NPC):
         super(Avatar, self).__init__(img, pos, tiler)
         self.health = 10
         #this is abused and becomes a bool after the timer has run
-        s = int(SharedObjects.AnimationStep())
+        s = int(SharedObjects.getAnimationStep())
         self.scalar = lambda: s
         self.interpolate = Interpolate(self.scalar(), self.tiler._to_coord((self.x,self.y)), self.tiler._to_coord((self.x,self.y)) )
-        
         self.state = None
         
     def notify(self, event):
@@ -61,43 +53,38 @@ class Avatar(NPC):
     def onTimerAnimate(self, *args):
         pos = self.pathfinder.pop()
         if pos != None:
-            scale = SharedObjects.Scale()
-            
-            cam_offset = SharedObjects.CameraOffset()
-            
+            scale = SharedObjects.getScale()
+            cam_offset = SharedObjects.getCameraOffset()
             start = self.tiler._to_coord((self.x, self.y))
             fin = self.tiler._to_coord(pos)
-            
             start = (start[0] - (cam_offset[0] * scale), start[1] - (cam_offset[1] * scale))
             fin = (fin[0] - (cam_offset[0] * scale), fin[1] - (cam_offset[1] * scale))
-            
             self.interpolate = Interpolate(self.scalar(),start ,fin)
-            
             self.x = pos[0]
             self.y = pos[1]
-            
         self.push(EventTypes.push_redraw)
         
     def onDraw(self, screen, event):
-        scale = SharedObjects.Scale()
-        
+        ###########
+        ## FIXME: the following should give unexpeted 
+        ## behavior why woud it except in the first place
+        ## 
+        scale = SharedObjects.getScale()
         #on the animation  timer pop the new position to iterate towards
-        if SharedObjects.AnimationStep():
+        if SharedObjects.getAnimationStep():
             self.onTimerAnimate()
         #use the interpolation generator function
         try:
-            scale = SharedObjects.Scale()
-            new_offset = SharedObjects.CameraOffset()
+            scale = SharedObjects.getScale()
+            new_offset = SharedObjects.getCameraOffset()
             b = self.interpolate.next()
-            
-            cam_offset = SharedObjects.CameraOffset()
+            #after the next step has been computed and set in sharedobjects
+            #get the new camera offset
+            cam_offset = SharedObjects.getCameraOffset()
             b = (b[0] + (cam_offset[0] * scale), b[1] + (cam_offset[1] * scale))
-            
-        #or just give our position in pixels
+        #FIXME: or just give our position in pixels
         except StopIteration:
-            b = self.tiler._to_coord((self.x,self.y))
-        
-        #draw character 
+            b = self.tiler._to_coord((self.x,self.y)) 
         img = scale_surf(self.image, scale)
         screen.blit(img, (int(b[0]), int(b[1])))
         
@@ -133,9 +120,8 @@ class NPCPartyMember(Avatar):
                 except:
                     pass
             self.pathfinder.lastpath.reverse()
-            
-            #delay to try to avoid overlaping with player
-            #hacky but good enough
-            
+            ## FIXME:
+            ## delay to try to avoid overlaping with player
+            ## hacky but good enough
             for i in range(random.randint(2,4)):
                 self.pathfinder.lastpath.append((self.x , self.y))

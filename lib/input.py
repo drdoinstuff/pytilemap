@@ -54,7 +54,7 @@ class Dragable(object): #object
         #return (-self.start[0] + self.current[0], -self.start[1] +  self.current[1])
     
     def _get_scaled_vect(self): #broken
-        scale = SharedObjects.Scale()
+        scale = SharedObjects.getScale()
         
         x0 = (self.start[0]/ scale)
         x1 = (self.current[0] / scale)

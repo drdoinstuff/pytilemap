@@ -14,7 +14,6 @@ def list_fonts():
 def find_installed_font(name, bold = 0, Italic = 0):
     file = pygame.font.match_font(name, bold, italic)
     
-
 def font_to_bitmap(text, text_size, text_color, gb_color, font_file = None, anti_alias = False): #antialias setting not working
     #fix newline characters and carrage returns to stay on the surface
     font = pygame.font.Font(font_file, text_size)
@@ -35,9 +34,7 @@ class Text(baseobjects.ObjectBase):
         self.foregroundcolor = (0,0,0)
         self.backgroundcolor = (255,255,255)
         self.antialias = False
-        
         self.alpha = 255
-        
         self.font = None
         self.alignment = alignment
         
@@ -46,15 +43,11 @@ class Text(baseobjects.ObjectBase):
         pass
         # old_width = image.get_width()
         # old_height = image.get_height()
-        
         # self.x =  self.x - (image.get_width()/2)
         # self.y =  self.y - (image.get_height()/2)
-        
         # image_rotated = pygame.transform.rotate(image, angle)
-        
         # new_width = pygame.get_width()
         # new_height = pygame.get_height()
-        
         # new_width = (old_width/2) - (new_width/2)
         # new_height = (old_height/2) - (new_height/2)
         
@@ -81,6 +74,7 @@ class Text(baseobjects.ObjectBase):
             pass
         elif self.alignment == 'bottomright':
             pass
+
     def get_rendered_size(self):
         scale = self.get_scale()
         txt = font_to_bitmap( str(self.text) , self.size , self.foregroundcolor, self.backgroundcolor, self.font, self.antialias)
@@ -91,19 +85,13 @@ class Text(baseobjects.ObjectBase):
         #here we render the text to a surface
         scale = self.get_scale()
         txt = font_to_bitmap( str(self.text) , self.size , self.foregroundcolor, self.backgroundcolor, self.font, self.antialias)
-        
-        
         width, height = txt.get_width() * scale, txt.get_height() * scale
-        
         ##scale
         txt = pygame.transform.scale(txt, (width , height))
-        
         txt.set_colorkey(self.backgroundcolor)
         txt.set_alpha(self.alpha)
-        
         x,y = self._check_text_alignment(width, height)
         blit_x, blit_y = self.x +x, self.y+y
-        
         #if surf == None:
         self.get_screen().blit(txt, (blit_x, blit_y))
             
@@ -117,21 +105,15 @@ class Text(baseobjects.ObjectBase):
                 antialias = False, gettext = None):
         
         self.text = text
-        
         self.x = x
         self.y = y
-        
         self.font_size = size
-        
         #convert from string to color?
         self.fg = fg
         self.bg = bg
-        
         self.font = font
         self.antialias = antialias
-        
         self.gettext = gettext
-        
         
     def get_text(self):
         self.text = self.gettext()
@@ -142,11 +124,9 @@ class Text(baseobjects.ObjectBase):
     @classmethod
     def set_style(self, size, fg, bg, font = None, antialias = False):
         self.font_size = size
-        
         #convert from string to color?
         self.fg = fg
         self.bg = bg
-        
         self.font = font
         self.antialias = antialias
             
@@ -154,7 +134,6 @@ class Text(baseobjects.ObjectBase):
         txt = scale_surf(font_to_bitmap( str(self.text) , \
         self.font_size , self.fg, self.bg, self.font, \
         self.antialias), self.get_scale())
-        
         txt.set_colorkey(self.bg)
         
         if surf == None:
@@ -162,7 +141,6 @@ class Text(baseobjects.ObjectBase):
 
 class TextBox(baseobjects.AllBase):
     def __init__(self, text, topleft, max_words = 5, decorations = None):
-    
         self.decorations = decorations #dict of 'topleft', etc and images
         self.topleft = topleft
         self.text = text
@@ -174,7 +152,6 @@ class TextBox(baseobjects.AllBase):
     def draw(self):
         wo = self.get_worldoffset()
         scale = self.get_scale()
-        
         cx = 0 
         cy = 0
         wc = 0
@@ -199,7 +176,6 @@ class TextBox(baseobjects.AllBase):
 if __name__ == "__main__":
     
     import os, sys
-
     import pygame
     from pygame.locals import *
     from baseobjects import *

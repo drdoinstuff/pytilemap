@@ -1,3 +1,6 @@
+//FIXME
+brutal slow down after resizing tiles!
+
 //todo
 systemwide: sort out what needs to be a class attribute if it doesnt put it in
 __init__ and call it with super()
@@ -7,6 +10,11 @@ tiler: make tiler blit to a surface and then dirty rect where needed
 tiler: when scrolling subsurf it and reblit it, then draw new tiles!
 
 #how do I change all the pathfinding and everything else to the new map when it's loaded?
+
+// 07/03/2016
++started to standardise class function names on CamelCap setters an getters
+- removing extra whitespace
+
 
 //02/01/2010
 - removed alot of the window management script

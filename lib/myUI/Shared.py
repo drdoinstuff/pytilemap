@@ -1,9 +1,7 @@
 
 ## UIShared #############################################################
 class UIShared(object):
-
     window_manager = None
-    
     focused_window = None
     focused_widget = None
     

@@ -1,13 +1,9 @@
 import os, string
-
 import pygame
 from pygame.locals import *
-
 from image import load_image
-
 from struct import unpack
 from simplexml import OpenXML as OpenXML
-
 #from MapLoaderSupport.wrapper_classes import Map, Layer, Tileset, Data
 from MapLoaderSupport.wrapper_classes import MapContainer, Layer, Tileset, Data, FormatConstants
 from MapLoaderSupport.helper_functions import convert, BuildGIDList, BuildTileRects
@@ -49,17 +45,12 @@ class ReadMap(OpenXML):
                 vars(namespace)[k] = v
 
     def parse(self, asset_path):
-
         self.proto_map = MapContainer()
         self.proto_map.layers = []
         self.proto_map.tilesets = dict()
-
-        print self, ': Reading map data'
-
+        print(self, ': Reading map data')
         child = self.dom.firstChild
         self.spider(child, self.proto_map, self.proto_map)
-        #print dir(self.proto_map.map.layer)
-        #exit()
         map = self.post(asset_path)
         return map
 

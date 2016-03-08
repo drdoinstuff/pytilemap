@@ -49,13 +49,13 @@ class Widget(Listener, UIShared):
         self.block_event(True)
         
     def get_my_pos(self, realative_to):
-        scale =  SharedObjects.Scale()
+        scale =  SharedObjects.getScale()
         x = realative_to[0] + (self.rect.x * scale) #* scale
         y = realative_to[1] + (self.rect.y * scale) #* scale
         return (x,y)
         
     def draw(self, screen, realative_to):
-        surf = surf_scale(self.img, SharedObjects.Scale())
+        surf = surf_scale(self.img, SharedObjects.getScale())
         #update widget size from surface size
         self.rect.size = surf.get_size()
         #getpos relative to parent window
@@ -165,7 +165,7 @@ class UIControl(Button):
         # if self.CLICKED:
             # self.redraw = True
             # self.moved(event.pos)
-            # scale = SharedObjects.Scale()
+            # scale = SharedObjects.getScale()
             # mv =  self.movement()
             
             # x, y = -mv[0], -mv[1]
@@ -233,7 +233,7 @@ class UIPotion(UIControl):
     def draw(self, screen, realative_to):
     
         if self.object_ref.inventory.Get(self.key)['uses'] > 0:
-            surf = surf_scale(self.img, SharedObjects.Scale())
+            surf = surf_scale(self.img, SharedObjects.getScale())
             #update widget size from surface size
             self.rect.size = surf.get_size()
             #getpos relative to parent window
@@ -249,7 +249,7 @@ class UIPotion(UIControl):
         # self.text = ''.split(text)
     # def draw(self, screen,realative_to):
         
-        # surf = surf_scale(self.img, SharedObjects.Scale())
+        # surf = surf_scale(self.img, SharedObjects.getScale())
         # #update widget size from surface size
         # self.rect.size = surf.get_size()
         # #getpos relative to parent window
