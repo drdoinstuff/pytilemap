@@ -26,6 +26,13 @@ from ..input import Dragable
 # register an event ie window uncovered and only redraw the whole screen on that
 # otherwise just dirty rect blit uncovered tiles
 
+#class DrawOrderer(object):
+#    def __init__(self):
+#        self.layer = len(self.RenderManager.listeners)
+#    def setLayer(self, layer):
+#        self.RenderManager.listeners.remove[self.layer]
+#        self.layer(layer):
+#        self.RenderManager.listeners.insert
 
 class TMXTiler(Tmxtlistener, Dragable, SharedObjects):
     '''TMXTiler is a very simple example of a smooth motion tiler\n \
@@ -35,7 +42,6 @@ class TMXTiler(Tmxtlistener, Dragable, SharedObjects):
     def __init__(self, MapObj, ViewArea, ViewXY = (0,0) ):
         ## for i in [SharedObjects, MouseListener, Dragable]:
         super(TMXTiler, self).__init__()
-        self.RenderManager.attach(self)
         self.map = MapObj
         self.redraw = True
         self.x = ViewXY[0] #pretty much unused!
@@ -49,7 +55,7 @@ class TMXTiler(Tmxtlistener, Dragable, SharedObjects):
         self._fine_offset_x_ = self._view_width_ & (self.map.getMapTileWidth()-1) 
         self._fine_offset_y_ = self._view_height_ & (self.map.getMapTileHeight() -1)
         self._tile_lead_ = 1#int(self.map.tileheight / self.map.tilewidth)
-
+    
     def get_local_coords(x,y):
         pass
         

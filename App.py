@@ -24,8 +24,6 @@ class myKBD(eventlistener.KeyBoardListener, eventlistener.PushComponent, SharedO
         self.push(EventTypes.push_quit)
     def on_key_down(self, event):
         self.push( EventTypes.push_redraw)
-    def on_key_q_down(self, event):
-        self.push(EventTypes.push_quit)
     def on_key_z_down(self, event):
         x = SharedObjects.getScale()
         SharedObjects.setScale(  x+1 )
@@ -79,9 +77,11 @@ class CycleMap(myUI.Widget.Button):
             self.maps.append(mapobj)
         self.picked = 0
     def on_widget_focus(self, event):
-        game.eventmanager.listeners.remove(self.tiler)
+        game.eventmanager.detach(self.tiler)
+        game.rendermanager.detach(self.tiler)
         self.tiler = tilemap.TMXTiler(self.maps[self.picked], (game.res[0], game.res[1]),(0,0))
         game.eventmanager.listeners.append(self.tiler)
+        game.rendermanager.listeners.insert(0,self.tiler)
         self.picked += 1
         if self.picked > len(self.maps) - 1:
             self.picked = 0
@@ -101,7 +101,7 @@ kbdman = myKBD()
 SharedObjects.setFlushColor((255,255,255))
 #SharedObjects.setFlushColor((0,0,0))
 #filepath =  string.join(game.paths.assets + ["maps", "test_pathfinding.tmx"], os.path.sep)
-filepath =  game.paths.assets + os.path.sep + "maps" + os.path.sep + "test2.tmx"
+filepath =  game.paths.assets + os.path.sep + "maps" + os.path.sep + "test_pathfinding.tmx"
 ## reading map data
 tmap = ReadMap(filepath)
 mapobj = tmap.parse(game.paths.assets)
@@ -139,7 +139,9 @@ close = myUI.Widget.HideButton( (2,2), img2)
 map1 =  os.path.sep.join([game.paths.assets, "maps", "test.tmx"])
 map2 =  os.path.sep.join([game.paths.assets, "maps", "test2.tmx"])
 map3 =  os.path.sep.join([game.paths.assets, "maps", "test_property_test.tmx"])
-nextmap = CycleMap( (13,2), img1, tiler, [map1, map2, map3], game.paths.assets)
+map4 =  os.path.sep.join([game.paths.assets, "maps", "test_pathfinding.tmx"])
+maps = [map1, map2, map3, map4]
+nextmap = CycleMap( (13,2), img1, tiler, maps, game.paths.assets)
 child = myUI.Window(win1, (60, 30))
 child.attach_widget(nextmap)
 child.attach_widget(close)
@@ -153,10 +155,35 @@ winroot.attach_widget(quit)
 winroot.attach_widget(move)
 winroot.attach_widget(zoomin)
 winroot.attach_widget(zoomout)
-#FIXME widget rect argument is a tuple and rect, img should be img, rect
-#intuitive order
-game.eventmanager.listeners.remove(tiler)
-game.eventmanager.listeners.append(tiler)
+  
+class PostOverlay(SharedObjects):
+    def __init__(self, surface):
+        self.surface = surface
+        #self.surface.set_alpha(50)
+        screen_array = pygame.surfarray.pixels3d(self.surface)
+        #screen_array-=100
+        scan = 0
+        sustain = 1
+        width = 2#SharedObjects.getScale()
+        altscan = 1
+        for line in screen_array:
+            scan+=1
+            for pix in line:
+                if scan > width:
+                    #line+=(line - 255)/6 #stop values going above 255
+                    pix+=(255 - pix)/10#stop values going above 255
+                    #line+=(255 - line)/20 #stop values going above 255
+                    #line-=100 #psyco~!
+                    sustain+=1
+                    if sustain > width:
+                        scan = 0
+                        sustain = 0
+
+    def onDraw(self, screen, event):
+        screen.blit(self.surface, (0,0), None, BLEND_ADD)
+
+#post = PostOverlay(pygame.surface.Surface(game.res))
+#game.rendermanager.attach(post)
 
 print( 'Entering Main Loop')
 while True:

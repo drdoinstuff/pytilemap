@@ -36,36 +36,9 @@ class RenderManager(RegisterComponent):
         super(RenderManager, self).__init__()#WeakRefList())
         Listener.setRenderManager(self)
     def render(self, display, screen, bg_color, event):
-        ''' clumsy but works'''
+        ''' leave it up to the object to manage a what it want to redraw and buffer surfaces'''
         screen.fill(bg_color)
-        sorted_l = self.listeners
-        #sorted_l.reverse()
-        for y in sorted_l:
-            l = y()
-            #print l
-            #if event in l.listeningEvents:
-            #l.onDraw(screen, event)
-            l.onDraw(screen, event)
-        #post(screen)
-        #sorted_l.reverse()
+        [x().onDraw(screen, event) for x in self.listeners]
         display.update()
 
-def post(screen):
-  #test post process - an easy scan line effect
-    screen_array = pygame.surfarray.pixels3d(screen)
-    #screen_array-=100
-    scan = 0
-    sustain = 0
-    width = 1#SharedObjects.Scale()
-    #altscan = 1
-    for line in screen_array:
-        scan+=1
-        if scan > width:
-            #line+=(line - 255)/5 #stop values going above 255
-            line+=(255 - line)/10#stop values going above 255
-            #/20 #stop values going above 255
-            #line-=100 #psyco~!
-            sustain+=1
-            if sustain > width:
-                scan = 0
-                sustain = 0
+

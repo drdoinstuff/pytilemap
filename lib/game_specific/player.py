@@ -46,10 +46,8 @@ class Avatar(NPC):
         self.scalar = lambda: s
         self.interpolate = Interpolate(self.scalar(), self.tiler._to_coord((self.x,self.y)), self.tiler._to_coord((self.x,self.y)) )
         self.state = None
-        
     def notify(self, event):
-        super(Avatar, self).notify(event)
-            
+        super(Avatar, self).notify(event)   
     def onTimerAnimate(self, *args):
         pos = self.pathfinder.pop()
         if pos != None:
@@ -63,7 +61,6 @@ class Avatar(NPC):
             self.x = pos[0]
             self.y = pos[1]
         self.push(EventTypes.push_redraw)
-        
     def onDraw(self, screen, event):
         ###########
         ## FIXME: the following should give unexpeted 
@@ -87,10 +84,8 @@ class Avatar(NPC):
             b = self.tiler._to_coord((self.x,self.y)) 
         img = scale_surf(self.image, scale)
         screen.blit(img, (int(b[0]), int(b[1])))
-        
     def on_key_m_down(self, event):
         self.state = 'move'
-        
     def on_mouse_button_down(self, event):
         if self.state is 'move':
             self.state = None
@@ -104,7 +99,6 @@ class NPCPartyMember(Avatar):
     def __init__(self, img, pos, tiler):
         super(NPCPartyMember, self).__init__(img, pos, tiler)
         self.listening_to = [pygame.MOUSEBUTTONDOWN,]
-    
     def on_mouse_rbutton_down(self, event):
         #find a path to the clicked location
         target = self.tiler._to_tile(event.pos[0], event.pos[1])

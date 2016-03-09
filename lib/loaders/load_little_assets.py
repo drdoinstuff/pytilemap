@@ -6,12 +6,10 @@ class ImageSets(object):
         self.time = time.time()
         self.basepath = basepath
         self.imageset = self.spider()
-        
         self.rects = dict()
         self.last_gid = 0
-        
         self.bind = dict()
-        
+
     def retrieve(self, name, rect):
         sheet = self.imageset[name]
         return sheet.subsurface(rect)
@@ -30,15 +28,11 @@ class ImageSets(object):
         scale = 1
         if os.path.exists(directory):
             file_list = dircache.listdir(directory)
-            #tile_list = []
             tile_list = dict()
             for i in file_list:
                 ext = i.split('.')
-                #print len(ext)
-                if ((len(ext) >= 2) and (ext[1] == (file_type))): #check different file names
-                    
+                if ((len(ext) >= 2) and (ext[1] == (file_type))):
                     #print 'LOADED: ', ext[0]
-                    
                     tile_list[ext[0]] = load_image(os.path.join(directory, i), colorkey, scale)
             self.imageset = tile_list
             return tile_list
@@ -68,11 +62,9 @@ class ImageSets(object):
                 # alpha_check = False
                 # ac_x = x+1
                 # while (alpha_check is False):
-                    # pygame.surface.Surface.get_at(ac
-                
+                    # pygame.surface.Surface.get_at(ac                
                 data[gid] = ((x,y),(size)) #((left, top), (width, height))
                 #check size against sprite sheet
-                
                 gid+=1
         self.bind[name] = data
         self.last_gid = gid
