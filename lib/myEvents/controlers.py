@@ -38,7 +38,9 @@ class RenderManager(RegisterComponent):
     def render(self, display, screen, bg_color, event):
         ''' leave it up to the object to manage a what it want to redraw and buffer surfaces'''
         screen.fill(bg_color)
-        [x().onDraw(screen, event) for x in self.listeners]
+        l =  self.listeners
+        [x().onDraw(screen, event) for x in l]
         display.update()
-
+# def Composite(self, screen):
+    [x().onDraw(screen, event) for x in self.listeners]
 

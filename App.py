@@ -108,10 +108,10 @@ mapobj = tmap.parse(game.paths.assets)
 ## actual tiler- attaches to event and render manager
 s = mapobj.map.properties['spawn_player_at']
 scale = SharedObjects.getScale()
-x = s[0] * mapobj.map.tilewidth * scale
-y = s[1] * mapobj.map.tileheight * scale
-mx =  (mapobj.map.width * scale/2) #- x
-my =  (mapobj.map.height * scale/2) #- y
+#x = s[0] * mapobj.map.tilewidth * scale
+#y = s[1] * mapobj.map.tileheight * scale
+#mx =  (mapobj.map.width * scale/2) #- x
+#my =  (mapobj.map.height * scale/2) #- y
 tiler = tilemap.TMXTiler(mapobj, (game.res[0], game.res[1]),(0,0))
 path = os.path.sep.join([game.paths.assets, 'tiles','_no_ownership' , 'oryx_lofi_1.2' ,'oryx_lofi_1.1',])
 #path = string.join(s, os.path.sep)
